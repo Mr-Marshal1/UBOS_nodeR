@@ -541,7 +541,7 @@
         "type": "function",
         "z": "50aaeb44ef81bdac",
         "name": "update_company",
-        "func": "msg.collection = 'companies';\n\nmsg.query = {\n    _id: objectid(msg.payload._id)\n}\n\ndelete msg.payload._id\n\nmsg.payload = {\n    $set: msg.payload\n}\n\nreturn msg;",
+        "func": "msg.collection = 'companies1';\n\nmsg.query = {\n    _id: objectid(msg.payload._id)\n}\n\ndelete msg.payload._id\n\nmsg.payload = {\n    $set: msg.payload\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
