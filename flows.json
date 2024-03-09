@@ -1,0 +1,590 @@
+[
+    {
+        "id": "847a6a5c69d20e5d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8155fc7c30fc80a6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "50aaeb44ef81bdac",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "020757b0b4abc0e9",
+        "type": "mongodb",
+        "hostname": "mongo-5759-ubos-s8mqq-mongo-5759.ubos-s8mqq",
+        "topology": "direct",
+        "connectOptions": "authSource=admin",
+        "port": "27017",
+        "db": "mongo",
+        "name": "mongo-5759"
+    },
+    {
+        "id": "bc7993053fd8d13b",
+        "type": "mongodb",
+        "hostname": "mongo-5759-ubos-s8mqq-mongo-5759.ubos-s8mqq",
+        "topology": "direct",
+        "connectOptions": "authSource=admin",
+        "port": "27017",
+        "db": "mongo",
+        "name": "mongo-5759"
+    },
+    {
+        "id": "973b0c9b532582f4",
+        "type": "mongodb",
+        "hostname": "mongo-5759-ubos-s8mqq-mongo-5759.ubos-s8mqq",
+        "topology": "direct",
+        "connectOptions": "authSource=admin",
+        "port": "27017",
+        "db": "mongo",
+        "name": "mongo-5759"
+    },
+    {
+        "id": "ef09358cfc276943",
+        "type": "mongodb",
+        "hostname": "mongo-5759-ubos-s8mqq-mongo-5759.ubos-s8mqq",
+        "topology": "direct",
+        "connectOptions": "authSource=admin",
+        "port": "27017",
+        "db": "mongo",
+        "name": "mongo-5759"
+    },
+    {
+        "id": "3a987a3c8a317521",
+        "type": "http in",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "url": "/create",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "69493396e2e8a579"
+            ]
+        ]
+    },
+    {
+        "id": "69493396e2e8a579",
+        "type": "function",
+        "z": "8155fc7c30fc80a6",
+        "name": "to MongoDB",
+        "func": "msg.collection = 'products';\n\nmsg.payload = {\n    ...msg.payload,\n    createDate: new Date,\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "ab1bf7795b4d9239",
+                "6cea3871d94445ea"
+            ]
+        ]
+    },
+    {
+        "id": "ab1bf7795b4d9239",
+        "type": "mongodb out",
+        "z": "8155fc7c30fc80a6",
+        "mongodb": "020757b0b4abc0e9",
+        "name": "Mongo CREATE",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 540,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6cea3871d94445ea",
+        "type": "http response",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "71461d85b9ac3f68",
+        "type": "http in",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "url": "/read",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "eba99d4b39815e7c"
+            ]
+        ]
+    },
+    {
+        "id": "eba99d4b39815e7c",
+        "type": "function",
+        "z": "8155fc7c30fc80a6",
+        "name": "to MongoDB",
+        "func": "msg.collection = 'products';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "54e0af23b64f633d"
+            ]
+        ]
+    },
+    {
+        "id": "54e0af23b64f633d",
+        "type": "mongodb in",
+        "z": "8155fc7c30fc80a6",
+        "mongodb": "bc7993053fd8d13b",
+        "name": "Mongo FIND",
+        "collection": "",
+        "operation": "find",
+        "x": 490,
+        "y": 200,
+        "wires": [
+            [
+                "aae12a354c24103a"
+            ]
+        ]
+    },
+    {
+        "id": "aae12a354c24103a",
+        "type": "http response",
+        "z": "8155fc7c30fc80a6",
+        "name": "getAllData",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "57002164881deabe",
+        "type": "http in",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "url": "/update",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "a2d6beb7d0a0fe7a"
+            ]
+        ]
+    },
+    {
+        "id": "a2d6beb7d0a0fe7a",
+        "type": "function",
+        "z": "8155fc7c30fc80a6",
+        "name": "to MongoDB",
+        "func": "msg.collection = 'products';\n\nmsg.query = {\n    _id: objectid(msg.payload._id)\n};\n\nmsg.payload = {\n    name: msg.payload.name,\n    price: msg.payload.price,\n    rating: msg.payload.rating,\n    createDate: msg.payload.createDate,\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "objectid",
+                "module": "objectid"
+            }
+        ],
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "762ba0fc8b3330b0",
+                "fcc7edb4e2adc50e"
+            ]
+        ]
+    },
+    {
+        "id": "762ba0fc8b3330b0",
+        "type": "mongodb out",
+        "z": "8155fc7c30fc80a6",
+        "mongodb": "973b0c9b532582f4",
+        "name": "Mongo UPDATE",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "update",
+        "x": 540,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "fcc7edb4e2adc50e",
+        "type": "http response",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 490,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "3d8714a72ff846c6",
+        "type": "http in",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "url": "/delete",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "f5f483abfde4b3db"
+            ]
+        ]
+    },
+    {
+        "id": "f5f483abfde4b3db",
+        "type": "function",
+        "z": "8155fc7c30fc80a6",
+        "name": "to MongoDB",
+        "func": "msg.collection = 'products';\n\nmsg.payload = {\n    _id: objectid(msg.payload._id),\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "objectid",
+                "module": "objectid"
+            }
+        ],
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "4859690615b4745c",
+                "332da13f5e115494"
+            ]
+        ]
+    },
+    {
+        "id": "4859690615b4745c",
+        "type": "mongodb out",
+        "z": "8155fc7c30fc80a6",
+        "mongodb": "ef09358cfc276943",
+        "name": "Mongo REMOVE",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 530,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "332da13f5e115494",
+        "type": "http response",
+        "z": "8155fc7c30fc80a6",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 470,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e963dd3a1bb8e94e",
+        "type": "http in",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "url": "/create_company",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "032261ca9027dfcc"
+            ]
+        ]
+    },
+    {
+        "id": "032261ca9027dfcc",
+        "type": "function",
+        "z": "50aaeb44ef81bdac",
+        "name": "post_company",
+        "func": "msg.collection = 'companies';\n\nmsg.payload.deleted=false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 80,
+        "wires": [
+            [
+                "204b87609350d1db",
+                "193b934deaa0db3c"
+            ]
+        ]
+    },
+    {
+        "id": "204b87609350d1db",
+        "type": "mongodb out",
+        "z": "50aaeb44ef81bdac",
+        "mongodb": "020757b0b4abc0e9",
+        "name": "DB company",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 710,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "193b934deaa0db3c",
+        "type": "http response",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2fe85d8a2ad43f9e",
+        "type": "http in",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "url": "/get_company",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "e5831b686f99776c"
+            ]
+        ]
+    },
+    {
+        "id": "e5831b686f99776c",
+        "type": "function",
+        "z": "50aaeb44ef81bdac",
+        "name": "get_company",
+        "func": "msg.collection = 'companies';\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "7898ac9172938b8e"
+            ]
+        ]
+    },
+    {
+        "id": "7898ac9172938b8e",
+        "type": "mongodb in",
+        "z": "50aaeb44ef81bdac",
+        "mongodb": "020757b0b4abc0e9",
+        "name": "DB company",
+        "collection": "",
+        "operation": "find",
+        "x": 650,
+        "y": 240,
+        "wires": [
+            [
+                "ec1bdf7d9886736d"
+            ]
+        ]
+    },
+    {
+        "id": "ec1bdf7d9886736d",
+        "type": "http response",
+        "z": "50aaeb44ef81bdac",
+        "name": "GetAllData",
+        "statusCode": "",
+        "headers": {},
+        "x": 830,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "837d6142524f49f5",
+        "type": "http in",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "url": "/delete_company",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 320,
+        "wires": [
+            [
+                "cf1bab1fe19051d6"
+            ]
+        ]
+    },
+    {
+        "id": "cf1bab1fe19051d6",
+        "type": "function",
+        "z": "50aaeb44ef81bdac",
+        "name": "delete_company",
+        "func": "msg.collection = 'companies';\n\nmsg.payload = {\n    _id: objectid(msg.payload._id),\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "objectid",
+                "module": "objectid"
+            }
+        ],
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "9cd9050430df9906",
+                "686ac6fcbe0cbdab"
+            ]
+        ]
+    },
+    {
+        "id": "9cd9050430df9906",
+        "type": "mongodb out",
+        "z": "50aaeb44ef81bdac",
+        "mongodb": "020757b0b4abc0e9",
+        "name": "DB company",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 670,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "686ac6fcbe0cbdab",
+        "type": "http response",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1c23571223107214",
+        "type": "http in",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "url": "/update_company",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 500,
+        "wires": [
+            [
+                "240883965f6de84d"
+            ]
+        ]
+    },
+    {
+        "id": "240883965f6de84d",
+        "type": "function",
+        "z": "50aaeb44ef81bdac",
+        "name": "update_company",
+        "func": "msg.collection = 'companies';\n\nmsg.query = {\n    _id: objectid(msg.payload._id)\n}\n\ndelete msg.payload._id\n\nmsg.payload = {\n    $set: msg.payload\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "objectid",
+                "module": "objectid"
+            }
+        ],
+        "x": 450,
+        "y": 500,
+        "wires": [
+            [
+                "4a3bf19ee62730d4",
+                "3664168378060727"
+            ]
+        ]
+    },
+    {
+        "id": "4a3bf19ee62730d4",
+        "type": "mongodb out",
+        "z": "50aaeb44ef81bdac",
+        "mongodb": "020757b0b4abc0e9",
+        "name": "DB company",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "update",
+        "x": 690,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3664168378060727",
+        "type": "http response",
+        "z": "50aaeb44ef81bdac",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 580,
+        "wires": []
+    }
+]
